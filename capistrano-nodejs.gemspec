@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
     EOF
   gem.summary       = 'Capistrano plugin for deployment of node.js applications'
   gem.homepage      = 'https://github.com/siwilkins/capistrano-nodejs'
-  gem.licenses =    = ['MIT']
+  gem.licenses      = ['MIT']
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
