@@ -41,7 +41,7 @@ stop on shutdown
 
 respawn
 respawn limit 99 5
-kill timeout #{kill_timeout}
+kill timeout #{fetch(:kill_timeout)}
 
 script
   cd #{current_path} && exec sudo -u #{fetch(:node_user)} NODE_ENV=#{fetch(:node_env)} #{fetch(:app_environment)} #{fetch(:node_binary)} #{current_path}/#{fetch(:app_command)} 2>> #{fetch(:stderr_log_path)} 1>> #{fetch(:stdout_log_path)}
