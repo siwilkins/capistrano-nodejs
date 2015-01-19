@@ -16,6 +16,8 @@ def remote_file_differs?(path, content)
   !(remote_file_exists?(path) && remote_file_content_same_as?(path, content))
 end
 
+package_json = MultiJson.load(File.open("package.json").read) rescue {}
+
 set :application, package_json["name"] unless defined? application
 set :app_command, package_json["main"] || "index.js" unless defined? app_command
 set :app_environment, "" unless defined? app_environment
