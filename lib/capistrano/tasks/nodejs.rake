@@ -43,7 +43,6 @@ script
   cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} #{app_environment} #{node_binary} #{current_path}/#{app_command} 2>> #{stderr_log_path} 1>> #{stdout_log_path}
 end script
 EOD
-}
 
 namespace :nodejs do
 
