@@ -19,7 +19,7 @@ end
 package_json = MultiJson.load(File.open("package.json").read) rescue {}
 
 set :application, fetch(:application, package_json["name"])
-set :app_command, fetch(:app_command, (package_json["main"] || "index.js")
+set :app_command, fetch(:app_command, (package_json["main"] || "index.js"))
 set :app_environment, fetch(:app_command, "")
 set :node_env, fetch(:node_env, "production")
 set :upstart_job_name, fetch(:upstart_job_name, "#{application}-#{node_env}")
