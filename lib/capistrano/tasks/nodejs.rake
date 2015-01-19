@@ -30,7 +30,7 @@ set :kill_timeout, fetch(:kill_timeout, 5)
 set :stderr_log_path, lambda { "#{shared_path}/log/#{node_env}.err.log" }
 set :stdout_log_path, lambda { "#{shared_path}/log/#{node_env}.out.log" }
 
-upstart_file_contents =
+set :upstart_file_contents, lambda {
 <<EOD
 #!upstart
 description "#{fetch(:application)} node app"
@@ -47,6 +47,7 @@ script
   cd #{current_path} && exec sudo -u #{fetch(:node_user)} NODE_ENV=#{fetch(:node_env)} #{fetch(:app_environment)} #{fetch(:node_binary)} #{current_path}/#{fetch(:app_command)} 2>> #{fetch(:stderr_log_path)} 1>> #{fetch(:stdout_log_path)}
 end script
 EOD
+}
 
 namespace :nodejs do
 
