@@ -27,7 +27,7 @@ set :node_binary, fetch(:node_binary, "/usr/bin/nodejs")
 set :upstart_job_name, fetch(:upstart_job_name, "#{fetch(:application)}-#{fetch(:node_env)}")
 set :upstart_file_path, fetch(:upstart_file_path, "/etc/init/#{fetch(:upstart_job_name)}.conf")
 set :kill_timeout, fetch(:kill_timeout, 5)
-set :stderr_log_path, fetch(:stderr_log_path, "#{shared_path}/log/#{fetch(:node_env)}.err.log")
+set :stderr_log_path, lambda { "#{shared_path}/log/#{node_env}.err.log" }
 set :stdout_log_path, fetch(:stdout_log_path, "#{shared_path}/log/#{fetch(:node_env)}.out.log")
 
 upstart_file_contents =
