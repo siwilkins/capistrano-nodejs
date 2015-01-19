@@ -22,7 +22,7 @@ set :application, fetch(:application, package_json["name"])
 set :app_command, fetch(:app_command, (package_json["main"] || "index.js"))
 set :app_environment, fetch(:app_command, "")
 set :node_env, fetch(:node_env, "production")
-set :upstart_job_name, fetch(:upstart_job_name, "#{application}-#{node_env}")
+set :upstart_job_name, fetch(:upstart_job_name, "#{fetch(:application)}-#{fetch(:node_env)}")
 set :upstart_file_path, fetch(:upstart_file_path, "/etc/init/#{upstart_job_name}.conf")
 set :kill_timeout, fetch(:kill_timeout, 5)
 
