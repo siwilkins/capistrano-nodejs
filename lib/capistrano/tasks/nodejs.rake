@@ -62,7 +62,7 @@ namespace :nodejs do
 
   task :check_upstart_config do
     on roles fetch(:app) do
-      Rake::Task[:create_upstart_config].invoke if remote_file_differs?(fetch(:upstart_file_path), fetch(:upstart_file_contents))
+      Rake::Task["nodejs:create_upstart_config"].invoke if remote_file_differs?(fetch(:upstart_file_path), fetch(:upstart_file_contents))
     end
   end
 
