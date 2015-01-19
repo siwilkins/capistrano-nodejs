@@ -71,7 +71,7 @@ namespace :nodejs do
     on roles fetch(:app) do
       temp_config_file_path = "#{shared_path}/#{fetch(:application)}.conf"
       # Generate and upload the upstart script
-      put fetch(:upstart_file_contents), temp_config_file_path
+      upload! temp_config_file_path, fetch(:upstart_file_contents)
 
       # Copy the script into place and make executable
       sudo "cp #{temp_config_file_path} #{upstart_file_path}"
