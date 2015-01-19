@@ -24,9 +24,10 @@ set :app_environment, "" unless defined? app_environment
 set :node_env, "production" unless defined? node_env
 set :upstart_job_name, lambda { "#{application}-#{node_env}" } unless defined? upstart_job_name
 set :upstart_file_path, lambda { "/etc/init/#{upstart_job_name}.conf" } unless defined? upstart_file_path
+set :kill_timeout, 5 unless defined? kill_timeout
 
-_cset(:upstart_file_contents) {
-  <<EOD
+upstart_file_contents =
+<<EOD
 #!upstart
 description "#{application} node app"
 author      "capistrano"
