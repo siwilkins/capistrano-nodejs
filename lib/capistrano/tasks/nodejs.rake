@@ -1,5 +1,5 @@
 def remote_file_exists?(path)
-  invoke_command("if [ -e '#{full_path}' ]; then echo -n 'true'; fi") do |ch, stream, out|
+  invoke_command("if [ -e '#{path}' ]; then echo -n 'true'; fi") do |ch, stream, out|
     return out == 'true'
   end
   return false
