@@ -18,13 +18,13 @@ end
 
 package_json = MultiJson.load(File.open("package.json").read) rescue {}
 
-set :application, package_json["name"] unless defined? application
-set :app_command, package_json["main"] || "index.js" unless defined? app_command
-set :app_environment, "" unless defined? app_environment
-set :node_env, "production" unless defined? node_env
-set :upstart_job_name, lambda { "#{application}-#{node_env}" } unless defined? upstart_job_name
-set :upstart_file_path, lambda { "/etc/init/#{upstart_job_name}.conf" } unless defined? upstart_file_path
-set :kill_timeout, 5 unless defined? kill_timeout
+set :application, package_json["name"] unless exists?(:application)
+set :app_command, package_json["main"] || "index.js" unless exists?(:app_command)
+set :app_environment, "" unless exists?(:app_environment)
+set :node_env, "production" unless exists?(:node_env)
+set :upstart_job_name, lambda { "#{application}-#{node_env}" } unless exists?(:upstart_job_name)
+set :upstart_file_path, lambda { "/etc/init/#{upstart_job_name}.conf" } unless exists?(:upstart_file_path)
+set :kill_timeout, 5 unless exists?(:kill_timeout)
 
 upstart_file_contents =
 <<EOD
