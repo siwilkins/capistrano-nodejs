@@ -13,7 +13,7 @@ def remote_file_content_same_as?(path, content)
 end
 
 def remote_file_differs?(path, content)
-  !(remote_file_exists?(path) && remote_file_content_same_as?(path, content)
+  !(remote_file_exists?(path) && remote_file_content_same_as?(path, content))
 end
 
 set :application, package_json["name"] unless defined? application
