@@ -22,14 +22,18 @@ set :application, fetch(:application, package_json["name"])
 set :app_command, fetch(:app_command, (package_json["main"] || "index.js"))
 set :app_environment, fetch(:app_command, "")
 set :node_env, fetch(:node_env, "production")
+set :node_user, fetch(:node_user, "deploy")
+set :node_binary, fetch(:node_binary, "/usr/bin/nodejs")
 set :upstart_job_name, fetch(:upstart_job_name, "#{fetch(:application)}-#{fetch(:node_env)}")
 set :upstart_file_path, fetch(:upstart_file_path, "/etc/init/#{fetch(:upstart_job_name)}.conf")
 set :kill_timeout, fetch(:kill_timeout, 5)
+set :stderr_log_path, fetch(:stderr_log_path, "#{shared_path}/log/#{fetch(:node_env)}.err.log")
+set :stdout_log_path, fetch(:stdout_log_path, "#{shared_path}/log/#{fetch(:node_env)}.out.log")
 
 upstart_file_contents =
 <<EOD
 #!upstart
-description "#{application} node app"
+description "#{fetch(:application)} node app"
 author      "capistrano"
 
 start on runlevel [2345]
@@ -40,7 +44,7 @@ respawn limit 99 5
 kill timeout #{kill_timeout}
 
 script
-  cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} #{app_environment} #{node_binary} #{current_path}/#{app_command} 2>> #{stderr_log_path} 1>> #{stdout_log_path}
+  cd #{current_path} && exec sudo -u #{fetch(:node_user)} NODE_ENV=#{fetch(:node_env)} #{fetch(:app_environment)} #{fetch(:node_binary)} #{current_path}/#{fetch(:app_command)} 2>> #{fetch(:stderr_log_path)} 1>> #{fetch(:stdout_log_path)}
 end script
 EOD
 
