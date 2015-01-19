@@ -75,7 +75,7 @@ namespace :nodejs do
       upload! stream, temp_config_file_path
 
       # Copy the script into place and make executable
-      sudo "cp #{temp_config_file_path} #{upstart_file_path}"
+      sudo "cp #{temp_config_file_path} #{fetch(:upstart_file_path)}"
     end
   end
 
