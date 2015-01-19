@@ -62,7 +62,7 @@ namespace :nodejs do
 
   task :check_upstart_config do
     on roles fetch(:app) do
-      create_upstart_config if remote_file_differs?(upstart_file_path, upstart_file_contents)
+      create_upstart_config if remote_file_differs?(fetch(:upstart_file_path), fetch(:upstart_file_contents))
     end
   end
 
