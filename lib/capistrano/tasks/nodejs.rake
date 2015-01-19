@@ -1,12 +1,12 @@
 def remote_file_exists?(path)
-  invoke_command("if [ -e '#{path}' ]; then echo -n 'true'; fi") do |ch, stream, out|
+  execute("if [ -e '#{path}' ]; then echo -n 'true'; fi") do |ch, stream, out|
     return out == 'true'
   end
   return false
 end
 
 def remote_file_content_same_as?(path, content)
-  invoke_command("md5sum #{path} | awk '{ print $1 }'") do |ch, stream, out|
+  execute("md5sum #{path} | awk '{ print $1 }'") do |ch, stream, out|
     return out.strip == Digest::MD5.hexdigest(content).strip
   end
   return false
