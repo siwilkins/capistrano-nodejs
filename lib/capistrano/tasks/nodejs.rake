@@ -56,7 +56,7 @@ namespace :nodejs do
     on roles fetch(:app) do
       execute :mkdir, '-p', "#{shared_path}/node_modules"
       execute :ln, '-fs', "#{shared_path}/node_modules", "#{release_path}/node_modules"
-      execute "cd #{release_path} && npm cache clear && npm install --no-bin-links --loglevel verbose"
+      execute "cd #{release_path} && npm cache clear && npm install --no-bin-links --loglevel silly"
     end
   end
 
